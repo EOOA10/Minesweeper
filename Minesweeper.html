@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="minesweeperStyle.css">
+	<script src="minesweeperEngine.js"></script>
+</head>
+<body>
+	<h2>Minesweeper</h2>
+	<p>Instructions: To start playing click in the Options button and select a difficulty</p>
+	<form>
+		<button id="btnOptions" type="button" onclick="openCloseGameOptions()">Options</button>
+		<br>
+		Mine count:<br>
+		<input type="text" id="txt_mineCount"><br>
+		Time:<br>
+		<input type="text" id="txt_time">
+	</form>
+	<div id="gameBoard">
+		<table id="gameTable"></table>
+	</div>
+	<div id="gameOptions">
+		<form class="gameOptionsForm">
+  			<button type="button" class="optionsBTN" onclick="startNewGame('Beginner')">Beginner (9x9, 10 Mines)</button><br>
+			<button type="button" class="optionsBTN" onclick="startNewGame('Intermediate')">Intermediate (16x16, 40 Mines)</button><br>
+			<button type="button" class="optionsBTN" onclick="startNewGame('Expert')">Expert (16x16, 40 Mines)</button><br>
+		</form>
+		
+	</div>
+</body>
+</html>
