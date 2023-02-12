@@ -7,6 +7,7 @@ var gameState = "waiting";
 var startTime;
 var gameTimer;
 
+//Funcion para los ajustes del juego y su dificultad
 function openCloseGameOptions(){
 	if(gameOptionsBTNstatus === "closed"){
 		gameOptionsBTNstatus = "open";
@@ -21,6 +22,7 @@ function openCloseGameOptions(){
 	}
 }
 
+//Funcion para iniciar el juego
 function startNewGame(type){
 	document.getElementById("gameBoard").style.display = "block";
 	openCloseGameOptions();
@@ -45,6 +47,7 @@ function getCurrentSettings(){
 	}
 }
 
+//Funcion del tablero de juego
 function buildGameBoard(){
 	var boardTable = document.getElementById("gameTable");	
 	var idx = 1;
@@ -72,6 +75,7 @@ function buildGameBoard(){
 	updateCells();
 }
 
+//Funcion para crear minas en el tablero de juego
 function createMines(){
 	mines = [];	
 	for (var i = 0; i < currentSettings.m;){
@@ -83,6 +87,7 @@ function createMines(){
 	}	
 }
 
+//Funcion para actualizar las celdas al momento de dar click 
 function updateCells(){
 	var boardTable = document.getElementById("gameTable");
 	var r = boardTable.children;
@@ -112,6 +117,7 @@ function onLeftClick(cell){
 	validateWinCondition(true);
 }
 
+//Funcion para colocar banderas en las minas
 function onRightClick(cell){
 	if(gameState == "waiting")
 		return;
@@ -129,6 +135,7 @@ function onRightClick(cell){
 	}
 }
 
+//Funcion de juego terminado o perdida
 function gameOver(mine){
 	stopTimer();
 	gameState = "waiting";
@@ -137,6 +144,7 @@ function gameOver(mine){
 	getPlayerInfo();
 }
 
+//Funcion para expandir las celdas vacias
 function expandEmptyCell(cellIndex){
 	var boardTable = document.getElementById("gameTable");
 	var r = boardTable.children;
@@ -156,6 +164,7 @@ function expandEmptyCell(cellIndex){
 	}
 }
 
+//Funcion para validar celdas en caso de que sean vacias, con minas o numerada
 function validateCellToExpand(cell, mode){
 	if(mines.includes(parseInt(cell.getAttribute("index"))) && mode === "leftClick"){
 		gameOver(parseInt(cell.getAttribute("index")));
@@ -204,6 +213,7 @@ function getNearbyCells(cellIndex){
 	}
 }
 
+//Funcion para validar la condicion de gane en el juego
 function validateWinCondition(normalWin){
 	var c = document.querySelectorAll("td[status='fu']");
 	var normalWin = c.length === ((currentSettings.r*currentSettings.c)-currentSettings.m);
@@ -235,10 +245,12 @@ function validateWinCondition(normalWin){
 
 }
 
+//Ingresar el nombre del jugador
 function getPlayerInfo(){
 	var pname = prompt("Please enter your name:");
 }
 
+//Funcion para mostrar las minas al finalizar el juego
 function showBombs(mine){
 	for (var i = 0; i < mines.length; i++){
 		var c = document.querySelector("td[index='"+mines[i]+"']");
@@ -252,6 +264,7 @@ function showBombs(mine){
 	}
 }
 
+//Funcion para limpiar el tablero del juego una vez finalizado y se quiera iniciar nueva partida
 function clearGameBoard(){
 	var boardTable = document.getElementById("gameTable");
 	var r = boardTable.childNodes;
